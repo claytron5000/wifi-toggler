@@ -2,7 +2,7 @@ from fabric import Connection, transfer
 import os
 
 interfaceName = "eth4"
-def toggleWifi(tog: bool):
+def toggle_wifi(tog: bool):
     c = Connection(host="ubnt@192.168.1.1", connect_kwargs={"password": os.environ['PWD']})
     t = transfer.Transfer(c)
     if tog:

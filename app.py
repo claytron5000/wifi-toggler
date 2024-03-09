@@ -2,7 +2,7 @@
 from flask import Flask, render_template, redirect, request
 import time
 from threading import Thread
-from toggleWifi import toggleWifi
+from toggle_wifi import toggle_wifi
 
 app = Flask(__name__)
 
@@ -13,10 +13,10 @@ def page():
 @app.route("/", methods=['POST'])
 def process_post():
     def do_work():
-        toggleWifi(False)
+        toggle_wifi(False)
         print("turning wifi off")
         time.sleep(60)
-        toggleWifi(True)
+        toggle_wifi(True)
     
     toggle = request.form.get("toggle")
     if (toggle):

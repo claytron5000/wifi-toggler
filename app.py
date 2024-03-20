@@ -12,13 +12,16 @@ def page():
 
 @app.route("/", methods=['POST'])
 def process_post():
-    def do_work():
-        toggle_wifi(False)
-        print("turning wifi off")
-        time.sleep(60)
-        toggle_wifi(True)
-    
     toggle = request.form.get("toggle")
+    toggle = int(toggle)
+    
+    def do_work():
+        # toggle_wifi(False)
+        print("turning wifi off for ", toggle * 60)
+        time.sleep(toggle * 60)
+        # toggle_wifi(True)
+    
+    
     if (toggle):
         print("turning off wifi")
         thread = Thread(target=do_work)

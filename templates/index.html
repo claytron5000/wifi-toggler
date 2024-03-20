@@ -20,7 +20,7 @@
 				justify-content: center;
 			}
 			.toggle {
-				width: 3rem;
+				width: 7rem;
 				height: 3rem;
 				margin: auto;
 			}
@@ -30,16 +30,19 @@
 		<div class="container mt-5">
 			<div class="row">
 				<form action="/" method="post">
-					<label for="toggle">Turn wifi off for 5 minutes</label>
+					<label for="toggle">Turn wifi off</label>
 					<br />
 					<span style="width: 100%">
-						<input
-							type="checkbox"
+						<select
 							id="toggle"
 							name="toggle"
 							class="toggle form-control"
 							aria-describedby="toggle"
-						/>
+						>
+							<option value="2">2 minutes</option>
+							<option value="5">5 minutes</option>
+							<option value="10">10 minutes</option>
+						</select>
 					</span>
 					<button type="submit" class="btn btn-primary mt-5">Submit</button>
 				</form>

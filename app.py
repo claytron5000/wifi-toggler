@@ -16,10 +16,10 @@ def process_post():
     toggle = int(toggle)
     
     def do_work():
-        # toggle_wifi(False)
+        toggle_wifi(False)
         print("turning wifi off for ", toggle * 60)
         time.sleep(toggle * 60)
-        # toggle_wifi(True)
+        toggle_wifi(True)
     
     
     if (toggle):

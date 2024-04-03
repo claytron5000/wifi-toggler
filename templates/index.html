@@ -6,8 +6,7 @@
 		<title>Wifi Toggle</title>
 		<link
 			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			href="static/bootstrap.min.css"
 			crossorigin="anonymous"
 		/>
 		<style>
@@ -48,12 +47,7 @@
 							<option value="10">10 minutes</option>
 						</select>
 					</span>
-					<button
-						disabled="true"
-						id="submit"
-						type="submit"
-						class="btn btn-primary mt-5"
-					>
+					<button id="submit" type="submit" class="btn btn-primary mt-5">
 						Submit
 					</button>
 				</form>
@@ -62,32 +56,14 @@
 		<script>
 			const button = document.getElementById("submit");
 			const info = document.getElementById("info");
-			setTimeout(() => {
-				fetch("/")
-					.then((response) => {
-						console.log(response);
-						if (response.ok) {
-							button.removeAttribute("disabled");
-						} else {
-							throw new Error("Something went wrong.");
-						}
-					})
-					.catch(() => {
-						info.textContent = "Network is shutdown";
-						checkNetwork();
-					});
-			}, 700);
-			function checkNetwork() {
-				const interval = setInterval(() => {
-					fetch("/").then((response) => {
-						if (response.ok) {
-							button.removeAttribute("disabled");
-							info.textContent = "";
-							clearInterval(interval);
-						}
-					});
-				}, 60 * 1000);
-			}
+			window.addEventListener("online", () => {
+				button.removeAttribute("disabled");
+				info.textContent = "";
+			});
+			window.addEventListener("offline", () => {
+				button.setAttribute("disabled", "true");
+				info.textContent = "Network offline";
+			});
 		</script>
 	</body>
 </html>

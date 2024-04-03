@@ -1,6 +1,5 @@
 
-from flask import Flask, render_template, redirect, request
-import time
+from flask import Flask, render_template, redirect, request, send_from_directory
 from threading import Thread
 from toggle_wifi import toggle_wifi2
 
@@ -9,6 +8,11 @@ app = Flask(__name__)
 @app.route("/", methods=['GET'])
 def page():
     return render_template('./index.html')
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    print("get static")
+    return send_from_directory('./static', path)
 
 @app.route("/", methods=['POST'])
 def process_post():

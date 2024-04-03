@@ -2,7 +2,7 @@
 from flask import Flask, render_template, redirect, request
 import time
 from threading import Thread
-from toggle_wifi import toggle_wifi
+from toggle_wifi import toggle_wifi2
 
 app = Flask(__name__)
 
@@ -16,10 +16,10 @@ def process_post():
     toggle = int(toggle)
     
     def do_work():
-        toggle_wifi(False)
-        print("turning wifi off for ", toggle * 60)
-        time.sleep(toggle * 60)
-        toggle_wifi(True)
+        toggle_wifi2(toggle)
+        # print("turning wifi off for ", toggle * 60)
+        # time.sleep(toggle * 60)
+        # toggle_wifi(True)
     
     
     if (toggle):

@@ -65,10 +65,12 @@
 			setTimeout(() => {
 				fetch("/")
 					.then((response) => {
+						console.log(response);
 						if (response.ok) {
 							button.removeAttribute("disabled");
+						} else {
+							throw new Error("Something went wrong.");
 						}
-						throw new Error("Something went wrong.");
 					})
 					.catch(() => {
 						info.textContent = "Network is shutdown";

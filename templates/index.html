@@ -24,11 +24,15 @@
 				height: 3rem;
 				margin: auto;
 			}
+			#info {
+				background-color: darksalmon;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container mt-5">
 			<div class="row">
+				<div id="info"></div>
 				<form action="/" method="post">
 					<label for="toggle">Turn wifi off</label>
 					<br />
@@ -44,9 +48,44 @@
 							<option value="10">10 minutes</option>
 						</select>
 					</span>
-					<button type="submit" class="btn btn-primary mt-5">Submit</button>
+					<button
+						disabled="true"
+						id="submit"
+						type="submit"
+						class="btn btn-primary mt-5"
+					>
+						Submit
+					</button>
 				</form>
 			</div>
 		</div>
+		<script>
+			const button = document.getElementById("submit");
+			const info = document.getElementById("info");
+			setTimeout(() => {
+				fetch("/")
+					.then((response) => {
+						if (response.ok) {
+							button.removeAttribute("disabled");
+						}
+						throw new Error("Something went wrong.");
+					})
+					.catch(() => {
+						info.textContent = "Network is shutdown";
+						checkNetwork();
+					});
+			}, 700);
+			function checkNetwork() {
+				const interval = setInterval(() => {
+					fetch("/").then((response) => {
+						if (response.ok) {
+							button.removeAttribute("disabled");
+							info.textContent = "";
+							clearInterval(interval);
+						}
+					});
+				}, 60 * 1000);
+			}
+		</script>
 	</body>
 </html>
